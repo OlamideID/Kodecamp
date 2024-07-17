@@ -61,6 +61,8 @@ class MiniCircle extends StatelessWidget {
             height: 10,
           ),
           styledtext(span)
+          ,
+          SizedBox(height: 10,)
         ],
       ),
     );
