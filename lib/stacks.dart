@@ -60,9 +60,7 @@ class MiniCircle extends StatelessWidget {
           const SizedBox(
             height: 10,
           ),
-          styledtext(span)
-          ,
-          SizedBox(height: 10,)
+          styledtext(span),
         ],
       ),
     );

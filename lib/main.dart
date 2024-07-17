@@ -51,6 +51,12 @@ class _KodeCampState extends State<KodeCamp> {
     );
   }
 
+  removeTask(Details details) {
+    setState(() {
+      dets.remove(details);
+    });
+  }
+
   List<Details> dets = [
     Details(
       type: 'E-Learning App',
@@ -64,47 +70,47 @@ class _KodeCampState extends State<KodeCamp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Container(
-        color: Colors.white,
-        height: 80,
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.white,
-          selectedItemColor: Colors.blue[700],
-          onTap: (value) {
-            setState(() {
-              _currentindex = value;
-            });
-          },
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                //color: Colors.black26,
-              ),
-              label: 'Home',
+      bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
+        selectedItemColor: Colors.blue[700],
+        onTap: (value) {
+          setState(() {
+            _currentindex = value;
+          });
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.other_houses_outlined,
+              //color: Colors.black26,
             ),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.paste,
-                  //color: Colors.black,
-                ),
-                label: 'Office'),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.calendar_today,
-                  //color: Colors.black,
-                ),
-                label: 'House'),
-            BottomNavigationBarItem(
-                icon: Icon(
-                  Icons.menu,
-                  //color: Colors.black,
-                ),
-                label: 'Other'),
-          ],
-          currentIndex: _currentindex,
-        ),
+            label: 'Start',
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.feed_outlined,
+                //color: Colors.black,
+              ),
+              label: 'Projects'),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.calendar_today_outlined,
+                //color: Colors.black,
+              ),
+              label: 'Calender'),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.menu,
+                //color: Colors.black,
+              ),
+              label: 'Menu'),
+        ],
+        selectedLabelStyle: const TextStyle(color: Color(0xFF4959F4)),
+        unselectedLabelStyle: TextStyle(color: Colors.black),
+        unselectedItemColor: Colors.black54,
+        showSelectedLabels: true,
+        currentIndex: _currentindex,
       ),
       floatingActionButton: SpeedDial(
         activeChild: const Icon(Icons.close),
@@ -173,6 +179,7 @@ class _KodeCampState extends State<KodeCamp> {
       ),
       body: [
         MyWidget(
+          removeTask: removeTask,
           samuel: dets,
         ),
         const Hiiiii(),

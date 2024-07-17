@@ -5,11 +5,14 @@ import 'package:kodecamp2/stacks.dart';
 import 'package:kodecamp2/styledtext.dart';
 
 class MyWidget extends StatelessWidget {
+  final void Function(Details details) removeTask;
   final List<Details> samuel;
-  const MyWidget({super.key, required this.samuel});
+  const MyWidget({super.key, required this.samuel, required this.removeTask});
 
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       backgroundColor: Colors.grey[200],
       body: Column(
@@ -27,7 +30,7 @@ class MyWidget extends StatelessWidget {
               ),
               Icon(
                 Icons.circle,
-                color: Colors.blue[900],
+                color: samuel.isEmpty ? Colors.transparent : Colors.blue[700],
                 size: 10,
               ),
               const SizedBox(
@@ -53,16 +56,31 @@ class MyWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20)),
-                  child: ListTile(
-                    leading: const Checked(),
-                    title: Text(
-                      product.type,
-                      style: const TextStyle(fontSize: 10),
+                  child: Dismissible(
+                    background: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: Colors.redAccent),
+                      child: const Icon(
+                        Icons.delete,
+                        color: Colors.white,
+                      ),
                     ),
-                    subtitle: Text(
-                      product.description,
-                      style: const TextStyle(
-                          fontSize: 15, fontWeight: FontWeight.bold),
+                    key: ValueKey(product),
+                    onDismissed: (direction) {
+                      removeTask(product);
+                    },
+                    child: ListTile(
+                      leading: const Checked(),
+                      title: Text(
+                        product.type,
+                        style: const TextStyle(fontSize: 10),
+                      ),
+                      subtitle: Text(
+                        product.description,
+                        style: const TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold),
+                      ),
                     ),
                   ),
                 ),
